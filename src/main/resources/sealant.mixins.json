@@ -1,0 +1,36 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "com.sealant.mixin",
+  "compatibilityLevel": "JAVA_21",
+  "mixins": [
+    "RapierColliderBakeryMixin",
+    "ChamberBlockCacheMixin",
+    "RapierBuoyancyMixin",
+    "RapierWaterDragMixin",
+    "EntityChamberFluidMixin",
+    "BoatChamberFluidMixin",
+    "RapierChamberPhysicsMixin",
+    "RapierStepMetricsMixin",
+    "PlayerMoveMetricsMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  },
+  "client": [
+    "client.ChamberLocalPlayerWaterMixin",
+    "client.ChamberCameraMixin",
+    "client.ChamberScreenWaterMixin",
+    "client.ChamberBubbleMixin",
+    "client.ChamberWaterMaskUniformMixin",
+    "client.ChamberGameRendererMixin",
+    "client.ChamberParticleMixin",
+    "client.ChamberParticleEngineMixin",
+    "client.ChamberSkyLightMixin",
+    "client.ChamberLightShaderMixin",
+    "client.ChamberChunkLightMixin",
+    "client.ChamberFancyLightMixin",
+    "client.ChamberSingleBlockLightMixin",
+    "client.ChamberOverlayBlockMixin"
+  ]
+}
