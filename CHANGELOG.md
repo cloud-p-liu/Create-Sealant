@@ -6,6 +6,7 @@
 - Adopt MIT for original work and preserve upstream code/template notices.
 - Rewrite and consolidate public documentation in English, with current specifications separated from superseded history.
 - Organize user, architecture, development, and historical documentation; move custom checks to `src/regression`.
+- Compile against the exact Ponder API bundled with pinned Create instead of a separate stale Maven API download.
 - Add contribution, conduct, security, and community-governance policies and GitHub contribution templates.
 - Exclude local worlds, logs, upstream research, private notes, and rejected experiments.
 - Replace the selection-item bitmap with an independently generated project icon.

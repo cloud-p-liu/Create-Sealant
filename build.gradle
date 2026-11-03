@@ -28,11 +28,6 @@ sourceSets.main.resources {
 
 repositories {
     maven {
-        name = 'CreateMod'
-        url = 'https://maven.createmod.net'
-    }
-
-    maven {
         name = 'RyanHCode'
         url = 'https://maven.ryanhcode.dev/releases'
     }
@@ -139,7 +134,6 @@ dependencies {
     compileOnly "io.github.llamalad7:mixinextras-neoforge:0.5.3"
 
     compileOnly "dev.ryanhcode.sable-companion:sable-companion-common-${minecraft_version}:1.6.0"
-    compileOnly "net.createmod.ponder:Ponder-NeoForge-1.21.1:1.0.69"
     compileOnly "maven.modrinth:oWaK0Q19:${aeronautics_version}"
     compileOnly "maven.modrinth:LNytGWDc:${create_version}"
     compileOnly "maven.modrinth:T9PomCSv:${sable_version}"
@@ -296,3 +290,20 @@ var extractGlsl = tasks.register('extractGlsl', Copy) {
     into layout.buildDirectory.dir('upstream')
 }
 tasks.named('compileJava') { dependsOn extractGlsl }
+
+// Compile against the Ponder API actually bundled by the pinned Create build.
+// This avoids a separate stale API download and never repackages Ponder.
+configurations { createBundle { transitive = false } }
+dependencies {
+    createBundle "maven.modrinth:LNytGWDc:${create_version}"
+    compileOnly files(layout.buildDirectory.file('upstream/ponder/ponder.jar'))
+}
+var extractPonder = tasks.register('extractPonder', Copy) {
+    from({ zipTree(configurations.createBundle.singleFile) }) {
+        include 'META-INF/jarjar/ponder-neoforge-*.jar'
+        eachFile { path = 'ponder.jar' }
+        includeEmptyDirs = false
+    }
+    into layout.buildDirectory.dir('upstream/ponder')
+}
+tasks.named('compileJava') { dependsOn extractPonder }

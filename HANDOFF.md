@@ -41,3 +41,5 @@ Before any gameplay restart, coordinate with the user and confirm a normal save/
 ## Publication verification (2026-11-03)
 
 `./gradlew clean build --offline --no-build-cache --no-configuration-cache` passed with all 14 tasks executed, including nested API extraction, Java compilation, resource guards, and the complete executable regression suite. Relative documentation links and a credential/local-path scan of public files passed. Upstream reference archives were not required. The built JAR was checked for MIT/third-party notices and absence of nested dependency JARs. No game was launched for this documentation/structure task. Existing NeoForge deprecated-API and Gradle future-version warnings remain; compatibility with Gradle 10 is not claimed.
+
+The first Linux CI run exposed a previously cached Ponder API download failing upstream TLS certificate validation. The build now extracts Ponder 1.0.82 from the pinned Create 6.0.10 bundle, matching the existing runtime, instead of downloading the stale 1.0.69 compile API separately. TLS verification remains enabled; no Ponder dependency is repackaged.
